@@ -19,7 +19,7 @@ namespace CanDatabase.Persistence.Configurations
             builder.HasMany(canDb => canDb.NetworkNodes)
                 .WithOne(networkNode => networkNode.CanDb!)
                 .HasForeignKey(networkNode => networkNode.CanDbId)
-                .OnDelete(DeleteBehavior.Cascade);                
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

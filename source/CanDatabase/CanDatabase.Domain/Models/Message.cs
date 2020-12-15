@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CanDatabase.Domain.Models
 {
@@ -79,6 +80,10 @@ namespace CanDatabase.Domain.Models
         #endregion Constructors
 
         #region Methods
+        public void AddSignal(Signal signal)
+        {
+            Signals = Signals.Append(signal);
+        }
         #endregion Methods
     }
 }

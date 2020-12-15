@@ -7,7 +7,7 @@ namespace CanDatabase.Persistence.DesignTime
     /// <summary>
     /// DesignTimeDatabaseContextFactory
     /// </summary>
-    public class DesignTimeDatabaseContextFactory 
+    public class DesignTimeDatabaseContextFactory
         : DesignTimeDatabaseContextFactoryBase<CanDatabaseContext>
     {
         protected override CanDatabaseContext CreateNewInstance(
