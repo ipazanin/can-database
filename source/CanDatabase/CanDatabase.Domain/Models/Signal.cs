@@ -16,6 +16,7 @@ namespace CanDatabase.Domain.Models
     public class Signal
     {
         #region Constants
+        public const int NameMaxLength = 128;
         #endregion Constants
 
         #region Properties

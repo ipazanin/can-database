@@ -7,8 +7,8 @@
 - Configure Dev Environment ✅
 - Add Project Backbone ✅
 - Create Domain Models From dbc-examples ✅
-- Configure Database ⬜️
-- Create Application Logic ⬜️
+- Configure Database ✅
+- Create Application Logi ⬜️
   - Add .dbc Parsing ⬜️
   - Add CRUD ⬜️
 - Create Web API Endpoints ⬜️

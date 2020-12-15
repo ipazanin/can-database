@@ -25,11 +25,11 @@ namespace CanDatabase.Domain.Models
 
         /// <summary>
         /// </summary>
-        public int CanDatabaseId { get; private set; }
+        public int CanDbId { get; private set; }
 
         /// <summary>
         /// </summary>
-        public CanDatabase? CanDatabase { get; private set; }
+        public CanDb? CanDb { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -45,19 +45,19 @@ namespace CanDatabase.Domain.Models
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="canDatabaseId"></param>
-        /// <param name="canDatabase"></param>
+        /// <param name="canDbId"></param>
+        /// <param name="canDb"></param>
         public NetworkNode(
             int id,
             string name,
-            int canDatabaseId,
-            CanDatabase? canDatabase
+            int canDbId,
+            CanDb? canDb
         )
         {
             Id = id;
             Name = name;
-            CanDatabaseId = canDatabaseId;
-            CanDatabase = canDatabase;
+            CanDbId = canDbId;
+            CanDb = canDb;
         }
         #endregion Constructors
 

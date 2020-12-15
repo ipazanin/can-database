@@ -32,11 +32,11 @@ namespace CanDatabase.Domain.Models
 
         /// <summary>
         /// </summary>
-        public int CanDatabaseId { get; private set; }
+        public int CanDbId { get; private set; }
 
         /// <summary>
         /// </summary>
-        public CanDatabase? CanDatabase { get; private set; }
+        public CanDb? CanDb { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -57,23 +57,23 @@ namespace CanDatabase.Domain.Models
         /// <param name="id"></param>
         /// <param name="canId"></param>
         /// <param name="name"></param>
-        /// <param name="canDatabaseId"></param>
-        /// <param name="canDatabase"></param>
+        /// <param name="canDbId"></param>
+        /// <param name="canDb"></param>
         /// <param name="signals"></param>
         public Message(
             int id,
             int canId,
             string name,
-            int canDatabaseId,
-            CanDatabase? canDatabase,
+            int canDbId,
+            CanDb? canDb,
             IEnumerable<Signal> signals
         )
         {
             Id = id;
             CanId = canId;
             Name = name;
-            CanDatabaseId = canDatabaseId;
-            CanDatabase = canDatabase;
+            CanDbId = canDbId;
+            CanDb = canDb;
             Signals = signals;
         }
         #endregion Constructors

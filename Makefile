@@ -43,14 +43,17 @@ endif
 
 database-update::
 	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;" \
 	dotnet ef database update -p $(PersistenceProjectPath) -v
 
 migration-add::
 	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;" \
 	dotnet ef migrations add -p $(PersistenceProjectPath) -v $(name)
 
 migration-remove::
 	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;" \
 	dotnet ef migrations remove -p $(PersistenceProjectPath) -v
 
 update::
@@ -92,3 +95,20 @@ create-coverage-report::
 	"-reports:$(UnitTestsDirectory)/*/*/*.xml" \
 	"-targetdir:$(UnitTestResultsPath)" \
 	-reporttypes:Html
+
+compose-database::
+ifeq ($(arg1), up)
+	docker-compose \
+	-f ./scripts/compose/database.yml \
+	-f ./scripts/compose/database-environment.yml  \
+	up --build $(arg2)
+else ifeq ($(strip $(arg1)),)
+	docker-compose \
+	-f ./scripts/compose/database.yml \
+	-f ./scripts/compose/database-environment.yml \
+	up --build $(arg2)
+else ifeq ($(arg1), down)
+	docker-compose -f ./scripts/compose/database.yml -f ./scripts/compose/database-environment.yml down
+else
+	echo "Invalid Argument. Accepted arguments: up, down"
+endif

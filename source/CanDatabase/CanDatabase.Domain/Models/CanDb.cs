@@ -5,7 +5,7 @@ namespace CanDatabase.Domain.Models
     /// <summary>
     /// Can Database, Represents root .dbc file data
     /// </summary>
-    public class CanDatabase
+    public class CanDb
     {
         #region Constants
         #endregion Constants
@@ -28,7 +28,7 @@ namespace CanDatabase.Domain.Models
         /// <summary>
         /// ORM Constructor
         /// </summary>
-        private CanDatabase()
+        private CanDb()
         {
         }
 
@@ -37,7 +37,7 @@ namespace CanDatabase.Domain.Models
         /// <param name="id"></param>
         /// <param name="messages"></param>
         /// <param name="networkNodes"></param>
-        public CanDatabase(
+        public CanDb(
             int id,
             IEnumerable<Message> messages,
             IEnumerable<NetworkNode> networkNodes
