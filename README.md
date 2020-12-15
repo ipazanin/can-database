@@ -6,7 +6,7 @@
 
 - Configure Dev Environment ✅
 - Add Project Backbone ✅
-- Create Model From dbc-examples ⬜️
+- Create Domain Models From dbc-examples ✅
 - Configure Database ⬜️
 - Create Application Logic ⬜️
   - Add .dbc Parsing ⬜️
