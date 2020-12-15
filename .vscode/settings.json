@@ -1,0 +1,67 @@
+{
+  "files.exclude": {
+    "**/.git": false,
+    "**/obj": true,
+    "**/bin": false,
+    "**/node_modules": true,
+    "**/client/build": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "csharp.maxProjectFileCountForDiagnosticAnalysis": 0,
+  "csharp.semanticHighlighting.enabled": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "omnisharp.autoStart": true,
+  "omnisharp.enableMsBuildLoadProjectsOnDemand": false,
+  "omnisharp.enableImportCompletion": true,
+  "omnisharp.projectLoadTimeout": 360,
+  "cSpell.enableFiletypes": [
+    "!asciidoc",
+    "!c",
+    "!cpp",
+    "!go",
+    "!handlebars",
+    "!haskell",
+    "!jade",
+    "!java",
+    "!latex",
+    "!less",
+    "!php",
+    "!pug",
+    "!python",
+    "!rust",
+    "!scala",
+    "aspnetcorerazor",
+    "dockerfile",
+    "git-rebase",
+    "groovy",
+    "makefile",
+    "shellscript",
+    "xml"
+  ],
+  "cSpell.ignorePaths": [
+    "**/package-lock.json",
+    "**/node_modules/**",
+    "**/vscode-extension/**",
+    "**/.git/objects/**",
+    ".vscode",
+    ".vscode-insiders",
+    "**/bin/**",
+    "**/obj/**",
+    "**/TestReports/**"
+  ],
+  "files.associations": {
+    "*.make": "makefile"
+  }
+}

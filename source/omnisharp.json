@@ -1,0 +1,16 @@
+{
+  "RoslynExtensionsOptions": {
+    "EnableAnalyzersSupport": true
+  },
+  "FormattingOptions": {
+    "EnableEditorConfigSupport": true
+  },
+  "FileOptions": {
+    "ExcludeSearchPatterns": [
+      "**/node_modules/**/*",
+      "**/bin/**/*",
+      "**/obj/**/*",
+      "**/Migrations/**/*"
+    ]
+  }
+}
