@@ -15,6 +15,8 @@ namespace CanDatabase.Domain.Models
     {
         #region Constants
         public const int NameMaxLength = 128;
+
+        public const string Keyword = "BO_";
         #endregion Constants
 
         #region Properties

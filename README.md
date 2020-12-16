@@ -8,10 +8,11 @@
 - Add Project Backbone ✅
 - Create Domain Models From dbc-examples ✅
 - Configure Database ✅
-- Create Application Logic ⬜️
+- Create Application Logic ✅
   - Add .dbc Parsing ✅
-  - Add CRUD ⬜️
-- Add Mediator Infrastructure ⬜️
+  - Add CRUD ✅
+- Add Application Infrastructure ✅
+- Add Web Api Infrastructure ⬜️
 - Create Web API Endpoints ⬜️
 - Create Client Application ⬜️
 - Add Docker and Docker Compose ⬜️

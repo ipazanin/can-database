@@ -11,6 +11,9 @@ namespace CanDatabase.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<CanDb> builder)
         {
+            builder.Property(canDb => canDb.OriginalFileName)
+                .HasMaxLength(CanDb.OriginalFileNameMaxLength);
+
             builder.HasMany(canDb => canDb.Messages)
                 .WithOne(message => message.CanDb!)
                 .HasForeignKey(message => message.CanDbId)

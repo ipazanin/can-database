@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CanDatabase.Domain\CanDatabase.Domain.csproj" />
+    <ProjectReference Include="..\CanDatabase.Persistence\CanDatabase.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

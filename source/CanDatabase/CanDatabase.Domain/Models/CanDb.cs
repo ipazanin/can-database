@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CanDatabase.Domain.Models
@@ -8,12 +9,21 @@ namespace CanDatabase.Domain.Models
     public class CanDb
     {
         #region Constants
+        public const int OriginalFileNameMaxLength = 300;
         #endregion Constants
 
         #region Properties
         /// <summary>
         /// </summary>
         public int Id { get; private set; }
+
+        /// <summary>
+        /// </summary>
+        public string OriginalFileName { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// </summary>
+        public DateTimeOffset CreateTimeStamp { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -39,11 +49,15 @@ namespace CanDatabase.Domain.Models
         /// <param name="networkNodes"></param>
         public CanDb(
             int id,
+            string originalFileName,
+            DateTimeOffset createTimeStamp,
             IEnumerable<Message> messages,
             IEnumerable<NetworkNode> networkNodes
         )
         {
             Id = id;
+            OriginalFileName = originalFileName;
+            CreateTimeStamp = createTimeStamp;
             Messages = messages;
             NetworkNodes = networkNodes;
         }

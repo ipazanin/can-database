@@ -9,6 +9,9 @@ namespace CanDatabase.Domain.IServices
     /// </summary>
     public interface IParseDbcFileService
     {
-        public Task<CanDb> ParseDbcFile(Stream dbcFileStream);
+        public Task<CanDb> ParseDbcFile(
+            Stream dbcFileStream,
+            string originalFileName
+        );
     }
 }

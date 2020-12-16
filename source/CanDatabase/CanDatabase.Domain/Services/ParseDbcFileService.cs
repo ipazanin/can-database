@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CanDatabase.Domain.IServices;
 using CanDatabase.Domain.Models;
+using Microsoft.Extensions.Logging;
 
 namespace CanDatabase.Domain.Services
 {
@@ -38,19 +39,26 @@ namespace CanDatabase.Domain.Services
         #endregion Constants
 
         #region Fields
+        private readonly ILogger<ParseDbcFileService> _logger;
         #endregion Fields
 
         #region Constructors
         /// <summary>
         /// ParseDbcFileService Constructor
         /// </summary>
-        public ParseDbcFileService()
+        public ParseDbcFileService(
+            ILoggerFactory loggerFactory
+        )
         {
+            _logger = loggerFactory.CreateLogger<ParseDbcFileService>();
         }
         #endregion Constructors
 
         #region Methods
-        public async Task<CanDb> ParseDbcFile(Stream dbcFileStream)
+        public async Task<CanDb> ParseDbcFile(
+            Stream dbcFileStream,
+            string originalFileName
+        )
         {
             var messages = new List<Message>();
             var networkNodes = new List<NetworkNode>();
@@ -67,6 +75,8 @@ namespace CanDatabase.Domain.Services
 
             var canDb = new CanDb(
                 id: default,
+                originalFileName: originalFileName,
+                createTimeStamp: DateTimeOffset.UtcNow,
                 messages: messages,
                 networkNodes: networkNodes
             );
@@ -74,7 +84,7 @@ namespace CanDatabase.Domain.Services
             return canDb;
         }
 
-        private static async Task ParseLines(
+        private async Task ParseLines(
             StreamReader streamReader,
             List<Message> messages,
             List<NetworkNode> networkNodes
@@ -100,12 +110,12 @@ namespace CanDatabase.Domain.Services
                 var keyword = properties.ElementAt(KeywordIndex);
                 switch (keyword)
                 {
-                    case "BU_":
+                    case NetworkNode.Keyword:
                         var currentNetworkNodes = ParseNetworkNodesFromProperties(properties: properties);
                         networkNodes.AddRange(currentNetworkNodes);
                         currentMessage = null;
                         break;
-                    case "BO_":
+                    case Message.Keyword:
                         var message = ParseMessageFromProperties(properties: properties);
                         if (message is not null)
                         {
@@ -113,7 +123,7 @@ namespace CanDatabase.Domain.Services
                         }
                         currentMessage = message;
                         break;
-                    case "SG_":
+                    case Signal.Keyword:
                         if (currentMessage is not null)
                         {
                             var signal = ParseSignalFromProperties(properties: properties);
@@ -130,10 +140,12 @@ namespace CanDatabase.Domain.Services
             }
         }
 
-        private static IEnumerable<NetworkNode> ParseNetworkNodesFromProperties(IEnumerable<string> properties)
+        private IEnumerable<NetworkNode> ParseNetworkNodesFromProperties(IEnumerable<string> properties)
         {
             if (properties.Count() < MinimumNumberOfNetworkNodeProperties)
             {
+                _logger.LogTrace(message: $"{nameof(NetworkNode)} doesn't contain none Node Names");
+
                 return Array.Empty<NetworkNode>();
             }
 
@@ -149,10 +161,12 @@ namespace CanDatabase.Domain.Services
             return networkNodes;
         }
 
-        private static Message? ParseMessageFromProperties(IEnumerable<string> properties)
+        private Message? ParseMessageFromProperties(IEnumerable<string> properties)
         {
             if (properties.Count() < MinimumNumberOfMessageProperties)
             {
+                _logger.LogTrace(message: $"{nameof(Message)} does not have correct amount of properties");
+
                 return null;
             }
 
@@ -165,6 +179,8 @@ namespace CanDatabase.Domain.Services
                 result: out var canId
             ))
             {
+                _logger.LogTrace(message: $"{nameof(Message)}'s {nameof(Message.CanId)} is not and integer");
+
                 return null;
             }
 
@@ -182,10 +198,11 @@ namespace CanDatabase.Domain.Services
             return message;
         }
 
-        private static Signal? ParseSignalFromProperties(IEnumerable<string> properties)
+        private Signal? ParseSignalFromProperties(IEnumerable<string> properties)
         {
             if (properties.Count() < MinimumNumberOfSignalProperties)
             {
+                _logger.LogTrace(message: $"{nameof(Signal)} does not have correct amount of properties");
                 return null;
             }
 
@@ -200,6 +217,7 @@ namespace CanDatabase.Domain.Services
 
             if (splittedStartBitAndLengthItems.Count() < MinimumNumberOfSignalStartBitAndLengthSplittedItems)
             {
+                _logger.LogTrace(message: $"{nameof(Signal)}' {nameof(startBitAndLength)} does not have correct amount of items");
                 return null;
             }
 
@@ -216,6 +234,7 @@ namespace CanDatabase.Domain.Services
                 result: out var startBit
             ))
             {
+                _logger.LogTrace(message: $"{nameof(Signal)}' {nameof(Signal.StartBit)} is not and integer");
                 return null;
             }
 
@@ -226,6 +245,8 @@ namespace CanDatabase.Domain.Services
                 result: out var length
             ))
             {
+                _logger.LogTrace(message: $"{nameof(Signal)}' {nameof(Signal.Length)} is not and integer");
+
                 return null;
             }
 
