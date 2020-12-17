@@ -47,13 +47,13 @@ namespace CanDatabase.Application.CanDbs.Commands.ParseDbcFile
             await _databaseContext.SaveChangesAsync(cancellationToken: cancellationToken);
 
             var response = new ParseDbcFileResponse(
-                messagesCount: canDb.Messages.Count(),
+                messagesCount: canDb.Messages.Count,
                 signalsCount: canDb.Messages
                     .Aggregate(
                         seed: 0,
-                        func: (signalsCount, message) => signalsCount + message.Signals.Count()
+                        func: (signalsCount, message) => signalsCount + message.Signals.Count
                     ),
-                networkNodesCount: canDb.NetworkNodes.Count()
+                networkNodesCount: canDb.NetworkNodes.Count
             );
 
             return response;

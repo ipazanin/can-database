@@ -172,7 +172,7 @@ namespace CanDatabase.Domain.Services
 
             var canIdString = properties.ElementAt(MessageCanIdPropertyIndex);
 
-            if (!int.TryParse(
+            if (!long.TryParse(
                 s: canIdString,
                 style: NumberStyles.Integer,
                 provider: NumberFormatInfo.InvariantInfo,
@@ -185,6 +185,7 @@ namespace CanDatabase.Domain.Services
             }
 
             var name = properties.ElementAt(MessageNamePropertyIndex);
+            name = name.Remove(name.Length - 1);
 
             var message = new Message(
                 id: default,

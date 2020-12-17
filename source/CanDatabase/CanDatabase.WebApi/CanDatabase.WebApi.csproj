@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AnalysisLevel>preview</AnalysisLevel>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,9 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <ProjectReference Include="..\CanDatabase.Domain\CanDatabase.Domain.csproj" />
-    <ProjectReference Include="..\CanDatabase.Persistence\CanDatabase.Persistence.csproj" />
-    <ProjectReference Include="..\CanDatabase.Common\CanDatabase.Common.csproj" /> -->
     <ProjectReference Include="..\CanDatabase.Application\CanDatabase.Application.csproj" />
   </ItemGroup>
 

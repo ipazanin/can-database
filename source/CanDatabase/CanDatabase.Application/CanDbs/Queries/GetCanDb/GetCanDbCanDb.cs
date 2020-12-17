@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using CanDatabase.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
 {
@@ -48,11 +49,13 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
                 Messages = canDb
                     .Messages
                     .AsQueryable()
-                    .Select(messageProjection),
+                    .Select(messageProjection)
+                    .ToList(),
                 NetworkNodes = canDb
                     .NetworkNodes
                     .AsQueryable()
                     .Select(networkNodeProjection)
+                    .ToList()
             };
         }
         #endregion Methods

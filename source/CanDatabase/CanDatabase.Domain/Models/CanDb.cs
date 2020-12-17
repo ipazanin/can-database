@@ -27,11 +27,11 @@ namespace CanDatabase.Domain.Models
 
         /// <summary>
         /// </summary>
-        public IEnumerable<Message> Messages { get; private set; } = new List<Message>();
+        public ICollection<Message> Messages { get; private set; } = new List<Message>();
 
         /// <summary>
         /// </summary>
-        public IEnumerable<NetworkNode> NetworkNodes { get; private set; } = new List<NetworkNode>();
+        public ICollection<NetworkNode> NetworkNodes { get; private set; } = new List<NetworkNode>();
         #endregion Properties
 
         #region Constructors
@@ -51,8 +51,8 @@ namespace CanDatabase.Domain.Models
             int id,
             string originalFileName,
             DateTimeOffset createTimeStamp,
-            IEnumerable<Message> messages,
-            IEnumerable<NetworkNode> networkNodes
+            ICollection<Message> messages,
+            ICollection<NetworkNode> networkNodes
         )
         {
             Id = id;

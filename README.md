@@ -13,7 +13,7 @@
   - Add CRUD ✅
 - Add Application Infrastructure ✅
 - Add Web Api Infrastructure ✅
-- Create Web API Endpoints ⬜️
+- Create Web API Endpoints ✅
 - Create Client Application ⬜️
 - Add Docker and Docker Compose ⬜️
 - Add Integration Tests ⬜️

@@ -60,7 +60,6 @@ namespace CanDatabase.WebApi
                 .AddControllers(mvcOptions =>
                 {
                     mvcOptions.Filters.Add(typeof(CustomExceptionFilterAttribute));
-                    mvcOptions.EnableEndpointRouting = false;
                 })
                 .AddJsonOptions(jsonOptions =>
                 {
@@ -77,10 +76,7 @@ namespace CanDatabase.WebApi
                             .RegisterValidatorsFromAssemblyContaining<ParseDbcFileValidator>()
                 );
 
-            services.AddResponseCaching();
-
             services.AddHealthChecks();
-            services.AddSignalR();
 
             services
                 .AddApiVersioning(apiVersioningOptions =>

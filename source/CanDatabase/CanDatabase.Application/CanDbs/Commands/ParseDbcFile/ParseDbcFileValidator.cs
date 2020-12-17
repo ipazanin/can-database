@@ -1,3 +1,4 @@
+using CanDatabase.Common.Constants;
 using CanDatabase.Domain.Models;
 using FluentValidation;
 
@@ -11,7 +12,8 @@ namespace CanDatabase.Application.CanDbs.Commands.ParseDbcFile
         public ParseDbcFileValidator()
         {
             RuleFor(parseDbcFileCommand => parseDbcFileCommand.OriginalFileName)
-                .MaximumLength(CanDb.OriginalFileNameMaxLength);
+                .MaximumLength(CanDb.OriginalFileNameMaxLength)
+                .Must(originalFileName => originalFileName.EndsWith(FileExtensionConstants.Dbc));
         }
     }
 }

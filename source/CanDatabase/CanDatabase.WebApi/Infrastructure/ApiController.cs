@@ -11,7 +11,14 @@ namespace CanDatabase.WebApi.Infrastructure
     public class ApiController : ControllerBase
     {
         #region Fields
+        /// <summary>
+        /// 
+        /// </summary>
         protected readonly ISender Sender;
+
+        /// <summary>
+        /// 
+        /// </summary>
         protected readonly IWebApiConfiguration WebApiConfiguration;
         #endregion Fields
 

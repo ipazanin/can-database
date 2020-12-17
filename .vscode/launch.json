@@ -1,0 +1,30 @@
+{
+  // Use IntelliSense to find out which attributes exist for C# debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "WebApi local",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-webapi",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/source/CanDatabase/CanDatabase.WebApi/bin/Debug/net5.0/CanDatabase.WebApi.dll",
+      "cwd": "${workspaceFolder}/source/CanDatabase/CanDatabase.WebApi",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "local",
+        "DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING": "Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;",
+        "ASPNETCORE_URLS": "http://localhost:7000"
+      }
+    },
+    {
+      "name": "Client local",
+      "type": "blazorwasm",
+      "request": "launch",
+      "preLaunchTask": "build-client",
+      "cwd": "${workspaceFolder}/source/CanDatabase/CanDatabase.Client"
+    }
+  ]
+}

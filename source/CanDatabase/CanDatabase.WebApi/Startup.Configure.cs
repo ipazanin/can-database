@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
 using CanDatabase.WebApi.Extensions;
+using CanDatabase.Persistence.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace CanDatabase.WebApi
 {
@@ -13,8 +11,14 @@ namespace CanDatabase.WebApi
         /// 
         /// </summary>
         /// <param name="app"></param>
-        public void Configure(IApplicationBuilder app)
+        /// <param name="databaseContext"></param>
+        public void Configure(
+            IApplicationBuilder app,
+            ICanDatabaseContext databaseContext
+        )
         {
+            databaseContext.Database.Migrate();
+
             app.UseSecurityHeadersMiddleware(securityHeadersBuilder =>
             {
                 securityHeadersBuilder.AddDefaultSecurePolicy();
@@ -36,12 +40,7 @@ namespace CanDatabase.WebApi
             });
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
 
-            app.UseStaticFiles();
-
-            app.UseResponseCaching();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

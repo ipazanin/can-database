@@ -27,7 +27,7 @@ namespace CanDatabase.Domain.Models
 
         /// <summary>
         /// </summary>
-        public int CanId { get; private set; }
+        public long CanId { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -43,7 +43,7 @@ namespace CanDatabase.Domain.Models
 
         /// <summary>
         /// </summary>
-        public IEnumerable<Signal> Signals { get; private set; } = new List<Signal>();
+        public ICollection<Signal> Signals { get; private set; } = new List<Signal>();
         #endregion Properties
 
         #region Constructors
@@ -65,11 +65,11 @@ namespace CanDatabase.Domain.Models
         /// <param name="signals"></param>
         public Message(
             int id,
-            int canId,
+            long canId,
             string name,
             int canDbId,
             CanDb? canDb,
-            IEnumerable<Signal> signals
+            ICollection<Signal> signals
         )
         {
             Id = id;
@@ -84,7 +84,7 @@ namespace CanDatabase.Domain.Models
         #region Methods
         public void AddSignal(Signal signal)
         {
-            Signals = Signals.Append(signal);
+            Signals.Add(signal);
         }
         #endregion Methods
     }

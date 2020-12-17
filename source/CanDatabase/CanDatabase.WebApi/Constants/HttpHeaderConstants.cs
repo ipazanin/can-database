@@ -1,9 +1,15 @@
 ﻿namespace CanDatabase.Common.Constants
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class HttpHeaderConstants
     {
 
         #region Custom Headers
+        /// <summary>
+        /// 
+        /// </summary>
         public const string VersionHeaderName = "version";
 
         #endregion Custom Headers
@@ -93,7 +99,7 @@
         public static readonly string XssProtectionBlock = "1; mode=block";
 
         /// <summary>
-        /// A partially supported directive that tells the user-agent to report potential XSS attacks to a single URL. Data will be POST'd to the report URL in JSON format. 
+        /// A partially supported directive that tells the user-agent to report potential XSS attacks to a single URL. Data will be POST-ed to the report URL in JSON format. 
         /// {0} specifies the report url, including protocol
         /// </summary>
         public static readonly string XssProtectionReport = "1; report={0}";

@@ -1,9 +1,13 @@
 ﻿namespace CanDatabase.Common.Constants
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MimeTypeConstants
     {
-        public const string OctetStream = "application/octet-stream";
-
+        /// <summary>
+        /// 
+        /// </summary>
         public const string Json = "application/json";
     }
 }

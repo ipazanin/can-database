@@ -16,7 +16,7 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
         #region Properties
         public int Id { get; private set; }
 
-        public int CanId { get; private set; }
+        public long CanId { get; private set; }
 
         public string Name { get; private set; } = "";
 
@@ -46,6 +46,7 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
                     .Signals
                     .AsQueryable()
                     .Select(signalProjection)
+                    .ToList()
             };
         }
         #endregion Methods

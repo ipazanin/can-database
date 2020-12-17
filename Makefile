@@ -1,9 +1,12 @@
 SolutionPath="source/CanDatabase/CanDatabase.sln"
+WebApiProjectPath="source/CanDatabase/CanDatabase.WebApi/CanDatabase.WebApi.csproj"
 PersistenceProjectPath="source/CanDatabase/CanDatabase.Persistence/CanDatabase.Persistence.csproj"
 DefaultVerbosity="minimal" # verbosity levels: quiet, minimal, normal, detailed, diagnostic
 LocalEnvironmentName="local"
 DefaultConfiguration="Release" # Configurations: Release, Debug
-DebugConfiguration="Debug" 
+DebugConfiguration="Debug"
+WebApiUrls="http://localhost:7000"
+DefaultConnectionString="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;"
 
 UnitTestResultsPath="source/UnitTests/TestReports"
 UnitTestRelativeResultsPath="TestReports"
@@ -43,17 +46,17 @@ endif
 
 database-update::
 	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
-	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;" \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet ef database update -p $(PersistenceProjectPath) -v
 
 migration-add::
 	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
-	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;" \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet ef migrations add -p $(PersistenceProjectPath) -v $(name)
 
 migration-remove::
 	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
-	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;" \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet ef migrations remove -p $(PersistenceProjectPath) -v
 
 update::
@@ -111,4 +114,22 @@ else ifeq ($(arg1), down)
 	docker-compose -f ./scripts/compose/database.yml -f ./scripts/compose/database-environment.yml down
 else
 	echo "Invalid Argument. Accepted arguments: up, down"
+endif
+
+start-webapi::
+ifeq ($(strip $(arg)),)	
+	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
+	ASPNETCORE_URLS=$(WebApiUrls) \
+	dotnet run \
+	--project $(WebApiProjectPath) \
+	--configuration $(DefaultConfiguration)
+else ifeq ($(arg), watch)
+	dotnet watch \
+	--project $(WebApiProjectPath) \
+	run \
+	--configuration $(DebugConfiguration) \
+	--urls $(WebApiUrls)
+else
+	echo "Invalid Argument. Accepted arguments: {empty}, watch"
 endif

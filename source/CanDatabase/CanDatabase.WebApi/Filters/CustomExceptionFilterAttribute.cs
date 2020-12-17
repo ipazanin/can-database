@@ -32,8 +32,7 @@ namespace CanDatabase.WebApi.Filters
         /// 
         /// </summary>
         /// <param name="webApiConfiguration"></param>
-        /// <param name="slackService"></param>
-        /// <param name="loggerService"></param>
+        /// <param name="loggerFactory"></param>
         public CustomExceptionFilterAttribute(
             IWebApiConfiguration webApiConfiguration,
             ILoggerFactory loggerFactory
