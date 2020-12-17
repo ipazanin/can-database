@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 
-namespace Espresso.Application.Infrastructure.MediatorInfrastructure
+namespace CanDatabase.Application.Infrastructure
 {
     public class ValidationPipeline<TRequest, TResponse>
         : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>

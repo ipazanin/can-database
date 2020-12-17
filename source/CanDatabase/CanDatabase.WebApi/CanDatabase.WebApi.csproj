@@ -7,9 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- <ProjectReference Include="..\CanDatabase.Domain\CanDatabase.Domain.csproj" />
+    <ProjectReference Include="..\CanDatabase.Persistence\CanDatabase.Persistence.csproj" />
+    <ProjectReference Include="..\CanDatabase.Common\CanDatabase.Common.csproj" /> -->
+    <ProjectReference Include="..\CanDatabase.Application\CanDatabase.Application.csproj" />
   </ItemGroup>
 
 </Project>

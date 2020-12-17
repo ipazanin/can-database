@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Espresso.Application.Infrastructure.MediatorInfrastructure
+namespace CanDatabase.Application.Infrastructure
 {
     public class LoggerRequestPipeline<TRequest, TResponse> :
         IPipelineBehavior<TRequest, TResponse> where TRequest : notnull

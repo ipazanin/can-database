@@ -12,7 +12,7 @@
   - Add .dbc Parsing ✅
   - Add CRUD ✅
 - Add Application Infrastructure ✅
-- Add Web Api Infrastructure ⬜️
+- Add Web Api Infrastructure ✅
 - Create Web API Endpoints ⬜️
 - Create Client Application ⬜️
 - Add Docker and Docker Compose ⬜️
