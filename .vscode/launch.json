@@ -5,26 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "WebApi local",
+      "name": "development",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build-webapi",
+      "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
       "program": "${workspaceFolder}/source/CanDatabase/CanDatabase.WebApi/bin/Debug/net5.0/CanDatabase.WebApi.dll",
       "cwd": "${workspaceFolder}/source/CanDatabase/CanDatabase.WebApi",
       "stopAtEntry": false,
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "local",
+        "ASPNETCORE_ENVIRONMENT": "development",
         "DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING": "Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;",
-        "ASPNETCORE_URLS": "http://localhost:7000"
+        "ASPNETCORE_URLS": "http://localhost:7000;https://localhost:7001"
       }
     },
-    {
-      "name": "Client local",
-      "type": "blazorwasm",
-      "request": "launch",
-      "preLaunchTask": "build-client",
-      "cwd": "${workspaceFolder}/source/CanDatabase/CanDatabase.Client"
-    }
   ]
 }

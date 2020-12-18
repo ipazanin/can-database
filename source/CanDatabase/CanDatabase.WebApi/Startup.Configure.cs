@@ -17,6 +17,11 @@ namespace CanDatabase.WebApi
             ICanDatabaseContext databaseContext
         )
         {
+            if (_webApiConfiguration.AppConfiguration.AppEnvironment == Common.Enums.AppEnvironment.Development)
+            {
+                app.UseWebAssemblyDebugging();
+            }
+
             databaseContext.Database.Migrate();
 
             app.UseSecurityHeadersMiddleware(securityHeadersBuilder =>
@@ -39,13 +44,21 @@ namespace CanDatabase.WebApi
                 options.RoutePrefix = SwaggerApiExplorerRoute;
             });
 
+            app.UseExceptionHandler("/Error");
+            app.UseHttpsRedirection();
+            app.UseBlazorFrameworkFiles();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");
             });
+
         }
     }
 }

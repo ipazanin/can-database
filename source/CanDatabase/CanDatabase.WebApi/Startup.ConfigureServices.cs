@@ -57,7 +57,7 @@ namespace CanDatabase.WebApi
         private IServiceCollection AddWebApi(IServiceCollection services)
         {
             services
-                .AddControllers(mvcOptions =>
+                .AddControllersWithViews(mvcOptions =>
                 {
                     mvcOptions.Filters.Add(typeof(CustomExceptionFilterAttribute));
                 })
@@ -75,6 +75,8 @@ namespace CanDatabase.WebApi
                         fluentValidatorConfiguration
                             .RegisterValidatorsFromAssemblyContaining<ParseDbcFileValidator>()
                 );
+
+            services.AddRazorPages();
 
             services.AddHealthChecks();
 

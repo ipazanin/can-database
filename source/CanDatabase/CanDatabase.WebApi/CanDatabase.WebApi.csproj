@@ -11,10 +11,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CanDatabase.Application\CanDatabase.Application.csproj" />
+    <ProjectReference Include="..\CanDatabase.Client\CanDatabase.Client.csproj" />
   </ItemGroup>
 
 </Project>

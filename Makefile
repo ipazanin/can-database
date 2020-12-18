@@ -1,11 +1,12 @@
 SolutionPath="source/CanDatabase/CanDatabase.sln"
 WebApiProjectPath="source/CanDatabase/CanDatabase.WebApi/CanDatabase.WebApi.csproj"
+ClientProjectPath="source/CanDatabase/CanDatabase.Client/CanDatabase.Client.csproj"
 PersistenceProjectPath="source/CanDatabase/CanDatabase.Persistence/CanDatabase.Persistence.csproj"
 DefaultVerbosity="minimal" # verbosity levels: quiet, minimal, normal, detailed, diagnostic
-LocalEnvironmentName="local"
+DevEnvironmentName="development"
 DefaultConfiguration="Release" # Configurations: Release, Debug
 DebugConfiguration="Debug"
-WebApiUrls="http://localhost:7000"
+WebApiUrls="http://localhost:7000;https://localhost:7001"
 DefaultConnectionString="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;"
 
 UnitTestResultsPath="source/UnitTests/TestReports"
@@ -44,18 +45,31 @@ else
 	$(SolutionPath)
 endif
 
+publish::
+ifeq ($(strip $(verbosity)),)
+	dotnet publish \
+	--configuration $(DefaultConfiguration) \
+	--verbosity $(DefaultVerbosity) \
+	$(SolutionPath)
+else
+	dotnet publish \
+	--configuration $(DefaultConfiguration) \
+	--verbosity $(verbosity) \
+	$(SolutionPath)
+endif
+
 database-update::
-	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	ASPNETCORE_ENVIRONMENT=$(DevEnvironmentName) \
 	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet ef database update -p $(PersistenceProjectPath) -v
 
 migration-add::
-	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	ASPNETCORE_ENVIRONMENT=$(DevEnvironmentName) \
 	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet ef migrations add -p $(PersistenceProjectPath) -v $(name)
 
 migration-remove::
-	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	ASPNETCORE_ENVIRONMENT=$(DevEnvironmentName) \
 	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet ef migrations remove -p $(PersistenceProjectPath) -v
 
@@ -116,9 +130,9 @@ else
 	echo "Invalid Argument. Accepted arguments: up, down"
 endif
 
-start-webapi::
+start::
 ifeq ($(strip $(arg)),)	
-	ASPNETCORE_ENVIRONMENT=$(LocalEnvironmentName) \
+	ASPNETCORE_ENVIRONMENT=$(DevEnvironmentName) \
 	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	ASPNETCORE_URLS=$(WebApiUrls) \
 	dotnet run \
@@ -133,3 +147,11 @@ else ifeq ($(arg), watch)
 else
 	echo "Invalid Argument. Accepted arguments: {empty}, watch"
 endif
+
+start-blazor::
+	ASPNETCORE_ENVIRONMENT=$(DevEnvironmentName) \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
+	ASPNETCORE_URLS=$(WebApiUrls) \
+	dotnet run \
+	--project $(ClientProjectPath) \
+	--configuration $(DefaultConfiguration)
