@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  can-database-webapi:
+    container_name: "can-database-webapi"
+    image: can-database-webapi
+    build:
+      context: ../../source
+      dockerfile: CanDatabase/CanDatabase.WebApi/Dockerfile
+    ports:
+      - "7000:80"
+      - "7001:443"

@@ -16,7 +16,7 @@
 - Create Web API Endpoints ✅
 - Configure Communication between Client And Server ✅
 - Create Client Application ⬜️
-- Add Docker and Docker Compose ⬜️
+- Add Docker and Docker Compose ✅
 - Add Integration Tests ⬜️
 - Write Detailed Documentation ⬜️
 

@@ -9,6 +9,10 @@ DebugConfiguration="Debug"
 WebApiUrls="http://localhost:7000;https://localhost:7001"
 DefaultConnectionString="Server=localhost,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;"
 
+DockerfilePath="source/CanDatabase/CanDatabase.WebApi/Dockerfile"
+DockerImage="can-database-webapi"
+DockerBuildContextPath="source"
+
 UnitTestResultsPath="source/UnitTests/TestReports"
 UnitTestRelativeResultsPath="TestReports"
 UnitTestsDirectory="source/UnitTests"
@@ -155,3 +159,44 @@ start-blazor::
 	dotnet run \
 	--project $(ClientProjectPath) \
 	--configuration $(DefaultConfiguration)
+
+docker-build::
+ifeq ($(strip $(v)),)
+	docker build \
+	--force-rm \
+	-f $(DockerfilePath) \
+	-t $(DockerImage):latest \
+	$(DockerBuildContextPath)
+else
+	docker build \
+	--force-rm \
+	-f $(DockerfilePath) \
+	-t $(DockerImage):$(v) \
+	$(DockerBuildContextPath)
+endif
+
+compose::
+ifeq ($(arg1), up)
+	docker-compose \
+	-f ./scripts/compose/database.yml \
+	-f ./scripts/compose/database-environment.yml  \
+	-f ./scripts/compose/webapi.yml \
+	-f ./scripts/compose/webapi-environment.yml \
+	up --build $(arg2)
+else ifeq ($(strip $(arg1)),)
+	docker-compose \
+	-f ./scripts/compose/database.yml \
+	-f ./scripts/compose/database-environment.yml \
+	-f ./scripts/compose/webapi.yml \
+	-f ./scripts/compose/webapi-environment.yml \
+	up --build $(arg2)
+else ifeq ($(arg1), down)
+	docker-compose \
+	-f ./scripts/compose/database.yml \
+	-f ./scripts/compose/database-environment.yml \
+	-f ./scripts/compose/webapi.yml \
+	-f ./scripts/compose/webapi-environment.yml \
+	down
+else
+	echo "Invalid Argument. Accepted arguments: up, down"
+endif

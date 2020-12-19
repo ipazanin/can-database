@@ -1,6 +1,6 @@
-version: '3.8'
+version: "3.8"
 services:
-  can-database:
+  can-database-database:
     environment:
-      SA_PASSWORD: 'VerySecretPassword1'
-      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: "VerySecretPassword1"
+      ACCEPT_EULA: "Y"

@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  can-database-webapi:
+    environment:
+      ASPNETCORE_ENVIRONMENT: development
+      DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING: "Server=can-database-database,1433;Database=CanDatabase;Application Name=CanDatabase;User=sa;Password=VerySecretPassword1;"
