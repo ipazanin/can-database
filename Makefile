@@ -13,9 +13,9 @@ DockerfilePath="source/CanDatabase/CanDatabase.WebApi/Dockerfile"
 DockerImage="can-database-webapi"
 DockerBuildContextPath="source"
 
-UnitTestResultsPath="source/UnitTests/TestReports"
+UnitTestResultsPath="source/TestReports"
 UnitTestRelativeResultsPath="TestReports"
-UnitTestsDirectory="source/UnitTests"
+UnitTestsDirectory="source"
 UnitTestsLogFileName="TestResults.xml"
 
 list::
@@ -113,9 +113,13 @@ endif
 	
 create-coverage-report::
 	sudo reportgenerator \
-	"-reports:$(UnitTestsDirectory)/*/*/*.xml" \
+	"-reports:$(UnitTestsDirectory)/*/*/*/*.xml" \
 	"-targetdir:$(UnitTestResultsPath)" \
 	-reporttypes:Html
+
+coverage:
+	make test-coverage verbosity=quiet
+	make create-coverage-report verbosity=quiet
 
 compose-database::
 ifeq ($(arg1), up)

@@ -17,11 +17,11 @@
 - Configure Communication between Client And Server ✅
 - Create Client Application ✅
 - Add Docker and Docker Compose ✅
-- Add Integration Tests ⬜️
+- Add Integration Tests ✅
 - Write Detailed Documentation ⬜️
 
 ### Optional
 
 - Add Unit Tests ⬜️
 - Add Github Workflow ⬜️
-- Add Code Coverage Reports ⬜️
+- Add Code Coverage Reports ✅
