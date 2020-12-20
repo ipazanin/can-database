@@ -22,6 +22,6 @@
 
 ### Optional
 
-- Add Unit Tests ⬜️
+- Add Unit Tests ✅
 - Add Github Workflow ⬜️
 - Add Code Coverage Reports ✅
