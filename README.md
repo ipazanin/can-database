@@ -1,5 +1,11 @@
 # CAN database
 
+## Workflows
+![Workflow](https://github.com/ipazanin/can-database/workflows/can-db-workflow/badge.svg)
+
+<br/>
+<hr/>
+
 ### Requirements:
 
 - Make
@@ -90,5 +96,5 @@ environment variable ASPNETCORE_ENVIRONMENT has value development case invariant
 ### Optional
 
 - Add Unit Tests ✅
-- Add Github Workflow ⬜️
+- Add Github Workflow ✅
 - Add Code Coverage Reports ✅

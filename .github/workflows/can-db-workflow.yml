@@ -1,0 +1,21 @@
+name: can-db-workflow
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  can-db-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - name: Restore
+        run: make restore
+      - name: Build
+        run: make Build
+      - name: Test
+        run: make test                
