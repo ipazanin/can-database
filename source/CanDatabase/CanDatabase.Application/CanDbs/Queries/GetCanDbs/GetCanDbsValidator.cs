@@ -12,11 +12,11 @@ namespace CanDatabase.Application.CanDbs.Commands.ParseDbcFile
     {
         public GetCanDbsValidator()
         {
-            RuleFor(getCanDbsQuery => getCanDbsQuery.Take)
+            RuleFor(getCanDbsQuery => getCanDbsQuery.PaginationParameters.Take())
                 .GreaterThan(0)
                 .LessThanOrEqualTo(100);
 
-            RuleFor(getCanDbsQuery => getCanDbsQuery.Skip)
+            RuleFor(getCanDbsQuery => getCanDbsQuery.PaginationParameters.Skip())
                 .GreaterThanOrEqualTo(0);
         }
     }

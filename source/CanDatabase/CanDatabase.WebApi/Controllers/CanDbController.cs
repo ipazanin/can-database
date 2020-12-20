@@ -6,6 +6,7 @@ using CanDatabase.Application.CanDbs.Queries.GetCanDb;
 using CanDatabase.Application.CanDbs.Queries.GetCanDbs;
 using CanDatabase.Common.Constants;
 using CanDatabase.Shared.DataTransferObjects;
+using CanDatabase.Shared.PaginationModels;
 using CanDatabase.WebApi.Configuration;
 using CanDatabase.WebApi.DataTransferObjects;
 using CanDatabase.WebApi.Infrastructure;
@@ -43,8 +44,7 @@ namespace CanDatabase.WebApi.Controllers
         /// Sample request:
         ///     Get /api/can-db
         /// </remarks>
-        /// <param name="take"></param>
-        /// <param name="skip"></param>
+        /// <param name="paginationParameters"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Response object containing Can Db's</returns>
         /// <response code="200">Response object containing Can Db's</response>
@@ -58,13 +58,12 @@ namespace CanDatabase.WebApi.Controllers
         [HttpGet]
         [Route("api/can-db")]
         public async Task<IActionResult> GetCanDbs(
-            [FromQuery] int take,
-            [FromQuery] int skip,
+            [FromQuery] PaginationParameters paginationParameters,
             CancellationToken cancellationToken
         )
         {
             var response = await Sender.Send(
-                request: new GetCanDbsQuery(take: take, skip: skip),
+                request: new GetCanDbsQuery(paginationParameters: paginationParameters),
                 cancellationToken: cancellationToken
             );
 

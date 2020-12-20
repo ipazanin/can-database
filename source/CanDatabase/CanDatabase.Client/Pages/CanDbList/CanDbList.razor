@@ -2,12 +2,14 @@
 @page "/can-db"
 
 @using CanDatabase.Shared.DataTransferObjects
+@using CanDatabase.Shared.PaginationModels
 @using CanDatabase.Client.Pages.CanDbItem
+@using CanDatabase.Client.Shared.Pagination
 @using System.Net.Http.Headers
 @using System.Globalization
 
 @inject HttpClient Http
-@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager 
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 
 <h1>Can Databases</h1>
 
@@ -39,24 +41,38 @@ else
         </tr>
     </thead>
     <tbody>
-        @foreach (var canDbListItem in Response.CanDbs)
+        @foreach (var canDbListItem in Response.PagedCanDbs.Items)
             {
-                <CanDbItem 
-                    Id=@(canDbListItem.Id) 
-                    FileName=@(canDbListItem.OriginalFileName)
-                    Created=@(canDbListItem.CreateTimeStamp) 
-                    DeleteCanDbHandler=@(DeleteCanDbHandler) 
-                    DetailsCanDbHandler=@(DetailsCanDbHandler) 
-                />
+                <CanDbItem Id=@(canDbListItem.Id) FileName=@(canDbListItem.OriginalFileName)
+                    Created=@(canDbListItem.CreateTimeStamp) DeleteCanDbHandler=@(DeleteCanDbHandler)
+                    DetailsCanDbHandler=@(DetailsCanDbHandler) />
             }
         </tbody>
     </table>
+
+    <div class="container">
+    <div class="row">
+        <div class="col">
+            <Pagination 
+                PagingMetadata=@(Response.PagedCanDbs.PagingMetadata) 
+                Spread=@(2) 
+                SelectedPage=@(SelectedPage) 
+            />
+        </div>
+    </div>
+</div>
 }
 
 @code {
     private string? ErrorMessage { get; set; }
 
     private GetCanDbsResponse? Response { get; set; }
+
+    public PaginationParameters PaginationParameters { get; set; } = new PaginationParameters
+    {
+        CurrentPage = 1,
+        PageSize = 10
+    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -67,8 +83,14 @@ else
     {
         Response = await Http
             .GetFromJsonAsync<GetCanDbsResponse>(
-                requestUri: $"api/can-db?take=20&skip=0"
+                requestUri: $"api/can-db?currentPage={PaginationParameters.CurrentPage}&pageSize={PaginationParameters.PageSize}"
             );
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        PaginationParameters = PaginationParameters with { CurrentPage = page };
+        await FetchCanDbs();
     }
 
     private async Task DeleteCanDbHandler(int canDbId)
@@ -88,7 +110,7 @@ else
     private void DetailsCanDbHandler(int canDbId)
     {
         NavigationManager.NavigateTo(uri: $"/can-db/{canDbId}");
-    }    
+    }
 
     private async Task OnDbcFileUpload(InputFileChangeEventArgs inputFileChangeEventArgs)
     {
@@ -104,17 +126,17 @@ else
         content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
         content.Add(
             content: new StreamContent(
-                content: fileMemoryStream,
-                bufferSize: Convert.ToInt32(fileMemoryStream.Length)
+            content: fileMemoryStream,
+            bufferSize: Convert.ToInt32(fileMemoryStream.Length)
             ),
             name: "file",
             fileName: dbcFile.Name
-            );
+        );
 
         var response = await Http.PostAsync(
-                requestUri: "api/can-db",
-                content: content
-            );
+            requestUri: "api/can-db",
+            content: content
+        );
 
 
         ErrorMessage = response.IsSuccessStatusCode ?

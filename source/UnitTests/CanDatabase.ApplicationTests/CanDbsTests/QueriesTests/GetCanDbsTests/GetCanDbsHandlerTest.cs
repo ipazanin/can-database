@@ -8,6 +8,7 @@ using CanDatabase.Persistence.Database;
 using Moq;
 using Xunit;
 using MockQueryable.Moq;
+using CanDatabase.Shared.PaginationModels;
 
 namespace CanDatabase.ApplicationTests.CanDbsTests.QueriesTests.GetCanDbsTests
 {
@@ -47,8 +48,11 @@ namespace CanDatabase.ApplicationTests.CanDbsTests.QueriesTests.GetCanDbsTests
             #region Act
             var response = await handler.Handle(
                 request: new GetCanDbsQuery(
-                    take: 20,
-                    skip: 0
+                    paginationParameters: new PaginationParameters
+                    {
+                        CurrentPage = 1,
+                        PageSize = 10
+                    }
                 ),
                 cancellationToken: default
             );
@@ -57,7 +61,7 @@ namespace CanDatabase.ApplicationTests.CanDbsTests.QueriesTests.GetCanDbsTests
             #region Assert
             Assert.Equal(
                 expected: expectedNumberOfCanDbs,
-                actual: response.CanDbs.Count()
+                actual: response.PagedCanDbs.Items.Count()
             );
             #endregion Assert
         }
@@ -84,8 +88,11 @@ namespace CanDatabase.ApplicationTests.CanDbsTests.QueriesTests.GetCanDbsTests
             #region Act
             var response = await handler.Handle(
                 request: new GetCanDbsQuery(
-                    take: 20,
-                    skip: 0
+                    paginationParameters: new PaginationParameters
+                    {
+                        PageSize = 10,
+                        CurrentPage = 1
+                    }
                 ),
                 cancellationToken: default
             );
@@ -94,7 +101,7 @@ namespace CanDatabase.ApplicationTests.CanDbsTests.QueriesTests.GetCanDbsTests
             #region Assert
             Assert.Equal(
                 expected: expectedNumberOfCanDbs,
-                actual: response.CanDbs.Count()
+                actual: response.PagedCanDbs.Items.Count()
             );
             #endregion Assert
         }

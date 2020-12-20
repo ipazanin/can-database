@@ -29,11 +29,11 @@
     [Parameter]
     public Action<int>? DetailsCanDbHandler { get; set; }
 
-    
+
     public async Task DeleteButtonClickHandler()
     {
         var task = DeleteCanDbHandler?.Invoke(Id);
-        if(task is not null)
+        if (task is not null)
         {
             await task;
         }

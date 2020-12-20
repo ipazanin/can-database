@@ -104,3 +104,9 @@ has value development (case invariant) <br/>
 - Add Unit Tests ✅
 - Add Github Workflow ✅
 - Add Code Coverage Reports ✅
+
+### Future Work
+
+- Separate Blazor Components Markup from Logic
+- Additional Unit and Integration Tests with at least 80% Code Coverage 
+- Additional features

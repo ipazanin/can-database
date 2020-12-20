@@ -1,4 +1,5 @@
 using CanDatabase.Shared.DataTransferObjects;
+using CanDatabase.Shared.PaginationModels;
 using MediatR;
 
 namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
@@ -9,19 +10,16 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
     public record GetCanDbsQuery : IRequest<GetCanDbsResponse>
     {
         #region Properties
-        public int Take { get; }
-
-        public int Skip { get; }
+        public PaginationParameters PaginationParameters { get; }
         #endregion Properties
 
         #region Constructors
         /// <summary>
         /// GetCanDbsQuery Constructor
         /// </summary>
-        public GetCanDbsQuery(int take, int skip)
+        public GetCanDbsQuery(PaginationParameters paginationParameters)
         {
-            Take = take;
-            Skip = skip;
+            PaginationParameters = paginationParameters;
         }
         #endregion Constructors
     }

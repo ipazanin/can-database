@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using CanDatabase.Shared.PaginationModels;
 
 namespace CanDatabase.Shared.DataTransferObjects
 {
@@ -9,7 +9,7 @@ namespace CanDatabase.Shared.DataTransferObjects
     public record GetCanDbsResponse
     {
         #region Properties
-        public IEnumerable<CanDbListItem> CanDbs { get; }
+        public PagedList<CanDbListItem> PagedCanDbs { get; }
         #endregion Properties
 
         #region Constructors
@@ -17,9 +17,9 @@ namespace CanDatabase.Shared.DataTransferObjects
         /// GetCanDbsResponse Constructor
         /// </summary>
         [JsonConstructor]
-        public GetCanDbsResponse(IEnumerable<CanDbListItem> canDbs)
+        public GetCanDbsResponse(PagedList<CanDbListItem> pagedCanDbs)
         {
-            CanDbs = canDbs;
+            PagedCanDbs = pagedCanDbs;
         }
         #endregion Constructors
     }

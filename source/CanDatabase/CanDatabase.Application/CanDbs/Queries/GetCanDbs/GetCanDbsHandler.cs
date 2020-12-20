@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CanDatabase.Persistence.Database;
 using CanDatabase.Shared.DataTransferObjects;
+using CanDatabase.Shared.PaginationModels;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -39,13 +40,26 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
             var canDbs = await _databaseContext
                 .CanDbs
                 .AsQueryable()
-                .Skip(request.Skip)
-                .Take(request.Take)
+                .Skip(request.PaginationParameters.Skip())
+                .Take(request.PaginationParameters.Take())
                 .Select(CanDbListItem.GetProjection())
                 .ToListAsync(cancellationToken);
 
+            var totalCount = await _databaseContext
+                .CanDbs
+                .CountAsync(cancellationToken: cancellationToken);
+
+            var pagedCanDbs = new PagedList<CanDbListItem>(
+                items: canDbs,
+                pagingMetadata: new PagingMetadata(
+                    totalCount: totalCount,
+                    currentPage: request.PaginationParameters.CurrentPage,
+                    pageSize: request.PaginationParameters.PageSize
+                )
+            );
+
             var response = new GetCanDbsResponse(
-                canDbs: canDbs
+                pagedCanDbs: pagedCanDbs
             );
 
             return response;
