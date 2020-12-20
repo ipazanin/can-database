@@ -16,6 +16,6 @@ jobs:
       - name: Restore
         run: make restore
       - name: Build
-        run: make Build
+        run: make build
       - name: Test
         run: make test                

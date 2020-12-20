@@ -2,8 +2,6 @@
 
 ## Workflows
 ![Workflow](https://github.com/ipazanin/can-database/workflows/can-db-workflow/badge.svg)
-
-<br/>
 <hr/>
 
 ### Requirements:
@@ -17,6 +15,10 @@
 
 ## Start Application
 
+Application has mapped ports
+- 7000 for HTTP
+- 7001 for HTTPS
+- 1433 for Database
 
 ### 1. With Docker Compose
 
@@ -63,12 +65,16 @@ Logical Architecture:
 <br/>
 ![Logical Architecture](documentation/images/logical-architecture.png)
 <br/>
+Open API Documentation (Swagger) can be found at /docs address:
+<br/>
+![Swagger](documentation/images/swagger.jpeg)
+<br/>
 <hr/>
 
 ## Known Issues
 
-Blazor Application is only served by server when <br/> 
-environment variable ASPNETCORE_ENVIRONMENT has value development case invariant <br/>
+Blazor Application is only served by server when environment variable ASPNETCORE_ENVIRONMENT <br/>
+has value development (case invariant) <br/>
 [Github Issue](https://github.com/dotnet/aspnetcore/issues/21992)
 
 <hr/>
