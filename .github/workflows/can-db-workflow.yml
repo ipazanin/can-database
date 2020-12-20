@@ -1,9 +1,9 @@
 name: can-db-workflow
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 jobs:
   can-db-job:
     runs-on: ubuntu-latest
