@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CanDatabase.Persistence.Database;
+using CanDatabase.Shared.DataTransferObjects;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,7 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
                 .AsQueryable()
                 .Skip(request.Skip)
                 .Take(request.Take)
-                .Select(GetCanDbsCanDb.GetProjection())
+                .Select(CanDbListItem.GetProjection())
                 .ToListAsync(cancellationToken);
 
             var response = new GetCanDbsResponse(

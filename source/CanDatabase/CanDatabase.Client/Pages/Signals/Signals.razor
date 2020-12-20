@@ -1,0 +1,21 @@
+﻿@using CanDatabase.Shared.DataTransferObjects
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm font-weight-bold">Name</div>
+        <div class="col-sm font-weight-bold">Start Bit</div>
+        <div class="col-sm font-weight-bold">Length</div>
+    </div>
+    @foreach (var signal in SignalListItem)
+    {
+        <div class="row">
+            <div class="col-sm text-break">@signal.Name</div>
+            <div class="col-sm text-break">@signal.StartBit</div>
+            <div class="col-sm text-break">@signal.Length</div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter]
+    public IEnumerable<SignalListItem> SignalListItem { get; set; } = new List<SignalListItem>();
+}

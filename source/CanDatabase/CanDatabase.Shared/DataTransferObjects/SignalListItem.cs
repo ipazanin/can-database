@@ -1,14 +1,15 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Text.Json.Serialization;
 using CanDatabase.Domain.Models;
 
-namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
+namespace CanDatabase.Shared.DataTransferObjects
 {
     /// <summary>
     /// GetCanDbSignal Model
     /// </summary>
-    public class GetCanDbSignal
+    public class SignalListItem
     {
         #region Properties
         public int Id { get; private set; }
@@ -24,15 +25,36 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
         /// <summary>
         /// GetCanDbSignal Constructor
         /// </summary>
-        private GetCanDbSignal()
+        private SignalListItem()
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="startBit"></param>
+        /// <param name="length"></param>
+        [JsonConstructor]
+        public SignalListItem(
+            int id,
+            string name,
+            int startBit,
+            int length
+        )
+        {
+            Id = id;
+            Name = name;
+            StartBit = startBit;
+            Length = length;
         }
         #endregion Constructors
 
         #region Methods
-        public static Expression<Func<Signal, GetCanDbSignal>> GetProjection()
+        public static Expression<Func<Signal, SignalListItem>> GetProjection()
         {
-            return signal => new GetCanDbSignal
+            return signal => new SignalListItem
             {
                 Id = signal.Id,
                 Name = signal.Name,

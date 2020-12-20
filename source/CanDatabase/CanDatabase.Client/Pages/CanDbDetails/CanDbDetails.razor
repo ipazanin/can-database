@@ -1,0 +1,65 @@
+﻿@page "/can-db/{Id}"
+@using CanDatabase.Shared.DataTransferObjects
+@using CanDatabase.Client.Pages.NetworkNodes
+@using CanDatabase.Client.Pages.Messages
+@inject HttpClient Http
+
+<h1>Can DB Details</h1>
+
+<hr />
+
+@if (ErrorMessage is not null)
+{
+    <p>@ErrorMessage</p>
+}
+else if (Response is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm font-weight-bold">File Name</div>
+            <div class="col-sm font-weight-bold">Created</div>
+            <div class="col-sm font-weight-bold">Network Nodes</div>
+        </div>
+        <div class="row">
+            <div class="col-sm">@Response.CanDb.OriginalFileName</div>
+            <div class="col-sm">@Response.CanDb.CreateTimeStamp.LocalDateTime.ToShortDateString()</div>
+            <div class="col-sm">
+                <NetworkNodes NetworkNodeListItems=@(Response.CanDb.NetworkNodes) />
+            </div>
+        </div>
+    </div>
+    <Messages MessageListItems=@(Response.CanDb.Messages) />
+}
+
+@code {
+    [Parameter]
+    public string? Id { get; set; }
+
+    private GetCanDbResponse? Response { get; set; }
+
+    private string? ErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchCanDb();
+    }
+
+    private async Task FetchCanDb()
+    {
+        try
+        {
+            Response = await Http
+                .GetFromJsonAsync<GetCanDbResponse>(
+                requestUri: $"api/can-db/{Id}"
+                );
+        }
+        catch (Exception)
+        {
+            ErrorMessage = "Can Db Was Not Found";
+        }
+    }
+}

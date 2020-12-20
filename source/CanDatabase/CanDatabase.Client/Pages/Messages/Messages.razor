@@ -1,0 +1,29 @@
+﻿@using CanDatabase.Shared.DataTransferObjects
+@using CanDatabase.Client.Pages.Signals
+
+<p class="font-weight-bold">Messages</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 font-weight-bold">Name</div>
+        <div class="col-sm-2 font-weight-bold">Can ID</div>
+        <div class="col-sm-8 font-weight-bold">Signals</div>
+    </div>
+    @foreach (var message in MessageListItems)
+    {
+        <div class="row">
+            <div class="col-sm-2 text-break">@message.Name</div>
+            <div class="col-sm-2 text-break">@message.CanId</div>
+            <div class="col-sm-8">
+                @if(message.Signals.Any())
+                {
+                    <Signals SignalListItem=@(message.Signals) />
+                }
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter]
+    public IEnumerable<MessageListItem> MessageListItems { get; set; } = new List<MessageListItem>();
+}

@@ -15,7 +15,7 @@
 - Add Web Api Infrastructure ✅
 - Create Web API Endpoints ✅
 - Configure Communication between Client And Server ✅
-- Create Client Application ⬜️
+- Create Client Application ✅
 - Add Docker and Docker Compose ✅
 - Add Integration Tests ⬜️
 - Write Detailed Documentation ⬜️

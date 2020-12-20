@@ -1,0 +1,126 @@
+﻿@page "/"
+@page "/can-db"
+
+@using CanDatabase.Shared.DataTransferObjects
+@using CanDatabase.Client.Pages.CanDbItem
+@using System.Net.Http.Headers
+@using System.Globalization
+
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager 
+
+<h1>Can Databases</h1>
+
+<hr />
+
+<h3>
+    Upload Can Database (.dbc) file
+</h3>
+<p>
+    <InputFile OnChange="@OnDbcFileUpload" />
+</p>
+
+@if (Response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    if (ErrorMessage is not null)
+    {
+        <div class="alert alert-danger" role="alert">@ErrorMessage</div>
+    }
+
+    <table class="table">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var canDbListItem in Response.CanDbs)
+            {
+                <CanDbItem 
+                    Id=@(canDbListItem.Id) 
+                    FileName=@(canDbListItem.OriginalFileName)
+                    Created=@(canDbListItem.CreateTimeStamp) 
+                    DeleteCanDbHandler=@(DeleteCanDbHandler) 
+                    DetailsCanDbHandler=@(DetailsCanDbHandler) 
+                />
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string? ErrorMessage { get; set; }
+
+    private GetCanDbsResponse? Response { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchCanDbs();
+    }
+
+    private async Task FetchCanDbs()
+    {
+        Response = await Http
+            .GetFromJsonAsync<GetCanDbsResponse>(
+                requestUri: $"api/can-db?take=20&skip=0"
+            );
+    }
+
+    private async Task DeleteCanDbHandler(int canDbId)
+    {
+        var response = await Http.DeleteAsync(
+                requestUri: $"api/can-db/{canDbId}"
+            );
+
+        ErrorMessage = response.IsSuccessStatusCode ?
+            null :
+            "Delete failed, unexpected error occurred";
+
+        await FetchCanDbs();
+        StateHasChanged();
+    }
+
+    private void DetailsCanDbHandler(int canDbId)
+    {
+        NavigationManager.NavigateTo(uri: $"/can-db/{canDbId}");
+    }    
+
+    private async Task OnDbcFileUpload(InputFileChangeEventArgs inputFileChangeEventArgs)
+    {
+        var dbcFile = inputFileChangeEventArgs.File;
+        if (!dbcFile.Name.EndsWith(".dbc", ignoreCase: true, culture: CultureInfo.InvariantCulture))
+        {
+            ErrorMessage = "File must be .dbc";
+            return;
+        }
+
+        var fileMemoryStream = dbcFile.OpenReadStream();
+        var content = new MultipartFormDataContent();
+        content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
+        content.Add(
+            content: new StreamContent(
+                content: fileMemoryStream,
+                bufferSize: Convert.ToInt32(fileMemoryStream.Length)
+            ),
+            name: "file",
+            fileName: dbcFile.Name
+            );
+
+        var response = await Http.PostAsync(
+                requestUri: "api/can-db",
+                content: content
+            );
+
+
+        ErrorMessage = response.IsSuccessStatusCode ?
+            null :
+            "Upload failed, unexpected error occurred";
+
+        await FetchCanDbs();
+    }
+}

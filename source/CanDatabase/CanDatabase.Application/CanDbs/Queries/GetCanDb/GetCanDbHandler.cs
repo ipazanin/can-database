@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CanDatabase.Application.Exceptions;
 using CanDatabase.Domain.Models;
 using CanDatabase.Persistence.Database;
+using CanDatabase.Shared.DataTransferObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +40,7 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
             var canDb = await _databaseContext
                 .CanDbs
                 .AsQueryable()
-                .Select(GetCanDbCanDb.GetProjection())
+                .Select(CanDbDetails.GetProjection())
                 .FirstOrDefaultAsync(
                     predicate: canDb => canDb.Id == request.CanDbId,
                     cancellationToken: cancellationToken

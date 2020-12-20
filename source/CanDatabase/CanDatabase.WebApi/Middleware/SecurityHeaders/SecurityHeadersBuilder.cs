@@ -8,7 +8,7 @@ namespace CanDatabase.WebApi.Middleware.SecurityHeaders
     /// </summary>
     public class SecurityHeadersBuilder
     {
-        private readonly SecurityHeadersPolicy _policy = new SecurityHeadersPolicy();
+        private readonly SecurityHeadersPolicy _policy = new();
 
         /// <summary>
         /// Add default headers in accordance with most secure approach

@@ -1,14 +1,15 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Text.Json.Serialization;
 using CanDatabase.Domain.Models;
 
-namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
+namespace CanDatabase.Shared.DataTransferObjects
 {
     /// <summary>
     /// GetCanDbNetworkNode Model
     /// </summary>
-    public class GetCanDbNetworkNode
+    public class NetworkNodeListItem
     {
         #region Properties
 
@@ -20,15 +21,27 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
         /// <summary>
         /// GetCanDbNetworkNode Constructor
         /// </summary>
-        private GetCanDbNetworkNode()
+        private NetworkNodeListItem()
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        [JsonConstructor]
+        public NetworkNodeListItem(int id, string name)
+        {
+            Id = id;
+            Name = name;
         }
         #endregion Constructors
 
         #region Methods
-        public static Expression<Func<NetworkNode, GetCanDbNetworkNode>> GetProjection()
+        public static Expression<Func<NetworkNode, NetworkNodeListItem>> GetProjection()
         {
-            return networkNode => new GetCanDbNetworkNode
+            return networkNode => new NetworkNodeListItem
             {
                 Id = networkNode.Id,
                 Name = networkNode.Name

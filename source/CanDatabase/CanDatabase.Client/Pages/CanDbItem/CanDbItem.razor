@@ -1,0 +1,46 @@
+﻿<tr>
+    <td>@FileName</td>
+    <td>@Created.LocalDateTime.ToShortDateString()</td>
+    <td>
+        <button class="btn btn-info" @onclick=@(DetailsButtonClickHandler)>
+            Details
+        </button>
+    </td>
+    <td>
+        <button class="btn btn-danger" @onclick=@(DeleteButtonClickHandler)>
+            Delete
+        </button>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public string? FileName { get; set; }
+
+    [Parameter]
+    public DateTimeOffset Created { get; set; }
+
+    [Parameter]
+    public Func<int, Task>? DeleteCanDbHandler { get; set; }
+
+    [Parameter]
+    public Action<int>? DetailsCanDbHandler { get; set; }
+
+    
+    public async Task DeleteButtonClickHandler()
+    {
+        var task = DeleteCanDbHandler?.Invoke(Id);
+        if(task is not null)
+        {
+            await task;
+        }
+    }
+
+    public void DetailsButtonClickHandler()
+    {
+        DetailsCanDbHandler?.Invoke(Id);
+    }
+}

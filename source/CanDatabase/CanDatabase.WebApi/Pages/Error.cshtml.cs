@@ -28,15 +28,11 @@ namespace CanDatabase.WebApi.Pages
         /// <returns></returns>
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        private readonly ILogger<ErrorModel> _logger;
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="logger"></param>
-        public ErrorModel(ILogger<ErrorModel> logger)
+        public ErrorModel()
         {
-            _logger = logger;
         }
 
         /// <summary>

@@ -30,7 +30,7 @@ namespace CanDatabase.WebApi.Configuration
         /// <summary>
         /// 
         /// </summary>
-        public ApiVersion ApiVersion => new ApiVersion(
+        public ApiVersion ApiVersion => new(
             majorVersion: _configuration.GetValue<int>("MajorVersion"),
             minorVersion: _configuration.GetValue<int>("MinorVersion")
         );

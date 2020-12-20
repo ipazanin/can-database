@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
+namespace CanDatabase.Shared.DataTransferObjects
 {
     /// <summary>
     /// GetCanDbsResponse
@@ -8,14 +9,15 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
     public record GetCanDbsResponse
     {
         #region Properties
-        public IEnumerable<GetCanDbsCanDb> CanDbs { get; }
+        public IEnumerable<CanDbListItem> CanDbs { get; }
         #endregion Properties
 
         #region Constructors
         /// <summary>
         /// GetCanDbsResponse Constructor
         /// </summary>
-        public GetCanDbsResponse(IEnumerable<GetCanDbsCanDb> canDbs)
+        [JsonConstructor]
+        public GetCanDbsResponse(IEnumerable<CanDbListItem> canDbs)
         {
             CanDbs = canDbs;
         }

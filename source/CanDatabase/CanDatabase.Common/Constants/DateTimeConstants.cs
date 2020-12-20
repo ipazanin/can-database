@@ -5,7 +5,7 @@ namespace CanDatabase.Common.Constants
     public static class DateTimeConstants
     {
         #region Points in Time
-        public static DateTime UnixEpochStartTime => new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static DateTime UnixEpochStartTime => new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         #endregion
 
         #region Timespans

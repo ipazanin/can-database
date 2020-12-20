@@ -143,6 +143,8 @@ ifeq ($(strip $(arg)),)
 	--project $(WebApiProjectPath) \
 	--configuration $(DefaultConfiguration)
 else ifeq ($(arg), watch)
+	ASPNETCORE_ENVIRONMENT=$(DevEnvironmentName) \
+	DATABASECONFIGURATION__DEFAULTCONNECTIONSTRING=$(DefaultConnectionString) \
 	dotnet watch \
 	--project $(WebApiProjectPath) \
 	run \

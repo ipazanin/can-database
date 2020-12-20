@@ -5,6 +5,7 @@ using CanDatabase.Application.CanDbs.Commands.ParseDbcFile;
 using CanDatabase.Application.CanDbs.Queries.GetCanDb;
 using CanDatabase.Application.CanDbs.Queries.GetCanDbs;
 using CanDatabase.Common.Constants;
+using CanDatabase.Shared.DataTransferObjects;
 using CanDatabase.WebApi.Configuration;
 using CanDatabase.WebApi.DataTransferObjects;
 using CanDatabase.WebApi.Infrastructure;

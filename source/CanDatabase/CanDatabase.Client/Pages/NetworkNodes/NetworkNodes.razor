@@ -1,0 +1,13 @@
+﻿@using CanDatabase.Shared.DataTransferObjects
+
+<div>
+    @string.Join(
+        separator: ", ", 
+        values: NetworkNodeListItems.Select(networkNode => networkNode.Name)
+    )
+</div>
+
+@code {
+    [Parameter]
+    public IEnumerable<NetworkNodeListItem> NetworkNodeListItems { get; set; } = new List<NetworkNodeListItem>();
+}

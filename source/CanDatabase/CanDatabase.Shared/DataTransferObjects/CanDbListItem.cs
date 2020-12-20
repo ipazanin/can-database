@@ -1,13 +1,14 @@
 using System;
 using System.Linq.Expressions;
+using System.Text.Json.Serialization;
 using CanDatabase.Domain.Models;
 
-namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
+namespace CanDatabase.Shared.DataTransferObjects
 {
     /// <summary>
     /// GetCanDbsCanDb Model
     /// </summary>
-    public class GetCanDbsCanDb
+    public class CanDbListItem
     {
         #region Properties
         public int Id { get; private set; }
@@ -18,18 +19,37 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDbs
         #endregion Properties
 
         #region Constructors
+
         /// <summary>
         /// GetCanDbsCanDb Constructor
         /// </summary>
-        private GetCanDbsCanDb()
+        private CanDbListItem()
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="originalFileName"></param>
+        /// <param name="createTimeStamp"></param>
+        [JsonConstructor]
+        public CanDbListItem(
+            int id,
+            string originalFileName,
+            DateTimeOffset createTimeStamp
+        )
+        {
+            Id = id;
+            OriginalFileName = originalFileName;
+            CreateTimeStamp = createTimeStamp;
         }
         #endregion Constructors
 
         #region Methods
-        public static Expression<Func<CanDb, GetCanDbsCanDb>> GetProjection()
+        public static Expression<Func<CanDb, CanDbListItem>> GetProjection()
         {
-            return canDb => new GetCanDbsCanDb
+            return canDb => new CanDbListItem
             {
                 Id = canDb.Id,
                 OriginalFileName = canDb.OriginalFileName,

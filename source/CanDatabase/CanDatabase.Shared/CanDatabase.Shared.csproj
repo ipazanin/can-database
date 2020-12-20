@@ -7,4 +7,9 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CanDatabase.Domain\CanDatabase.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,3 +1,4 @@
+using CanDatabase.Shared.DataTransferObjects;
 using MediatR;
 
 namespace CanDatabase.Application.CanDbs.Queries.GetCanDb

@@ -1,4 +1,6 @@
-namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
+using System.Text.Json.Serialization;
+
+namespace CanDatabase.Shared.DataTransferObjects
 {
     /// <summary>
     /// GetCanDbResponse
@@ -6,14 +8,15 @@ namespace CanDatabase.Application.CanDbs.Queries.GetCanDb
     public record GetCanDbResponse
     {
         #region Properties
-        public GetCanDbCanDb CanDb { get; }
+        public CanDbDetails CanDb { get; }
         #endregion Properties
 
         #region Constructors
         /// <summary>
         /// GetCanDbResponse Constructor
         /// </summary>
-        public GetCanDbResponse(GetCanDbCanDb canDb)
+        [JsonConstructor]
+        public GetCanDbResponse(CanDbDetails canDb)
         {
             CanDb = canDb;
         }
