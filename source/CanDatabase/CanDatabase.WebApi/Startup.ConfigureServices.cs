@@ -21,7 +21,10 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace CanDatabase.WebApi
 {
-    internal sealed partial class Startup
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed partial class Startup
     {
         /// <summary>
         /// Configures Applications DI IoC Container

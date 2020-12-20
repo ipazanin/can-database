@@ -1,0 +1,44 @@
+VERSION "DNPBNNNYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN/4/%%%/4/'%**4NNN///"
+
+BS_:
+
+BU_: xx GearBox EngineControl DashBoard ABS
+
+
+BO_ 200 WheelInfo: 8 ABS
+ SG_ WheelSpeedRR : 48|16@1+ (0.02,0) [0|1300] "1/min"  GearBox
+ SG_ WheelSpeedRL : 32|16@1+ (0.02,0) [0|1300] "1/min"  GearBox
+ SG_ WheelSpeedFR : 16|16@1+ (0.02,0) [0|1300] "1/min"  GearBox
+ SG_ WheelSpeedFL : 0|16@1+ (0.02,0) [0|1300] "1/min"  GearBox
+
+BO_ 1020 GearBoxInfo: 1 GearBox
+ SG_ EcoMode : 6|2@1+ (1,0) [0|1] ""  EngineControl,DashBoard
+ SG_ ShiftRequest : 3|1@1+ (1,0) [0|0] ""  EngineControl
+ SG_ Gear : 0|3@1+ (1,0) [0|8] ""  EngineControl,DashBoard,ABS
+
+BO_ 100 EngineData: 4 EngineControl
+ SG_ IdleRunning : 23|1@1+ (1,0) [0|0] ""  GearBox
+ SG_ EngTemp : 16|7@1+ (2,-50) [-50|150] "degC"  GearBox,DashBoard
+ SG_ EngSpeed : 0|16@1+ (0.1,0) [0|6500] "rpm"  GearBox,DashBoard
+
+BO_ 201 ASRdata: 3 ABS
+ SG_ Diagnostics : 16|8@1+ (1,0) [0|0] ""  DashBoard
+ SG_ GearLock : 15|1@1+ (1,0) [0|0] ""  ABS
+ SG_ CarSpeed : 0|10@1+ (0.5,0) [0|300] "km/h"  GearBox,DashBoard
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

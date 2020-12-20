@@ -2,10 +2,15 @@
 using CanDatabase.WebApi.Extensions;
 using CanDatabase.Persistence.Database;
 using Microsoft.EntityFrameworkCore;
+using System;
+using Microsoft.Extensions.Logging;
 
 namespace CanDatabase.WebApi
 {
-    internal sealed partial class Startup
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed partial class Startup
     {
         /// <summary>
         /// 
@@ -22,7 +27,10 @@ namespace CanDatabase.WebApi
                 app.UseWebAssemblyDebugging();
             }
 
-            databaseContext.Database.Migrate();
+            if (databaseContext.Database.IsRelational())
+            {
+                databaseContext.Database.Migrate();
+            }
 
             app.UseSecurityHeadersMiddleware(securityHeadersBuilder =>
             {

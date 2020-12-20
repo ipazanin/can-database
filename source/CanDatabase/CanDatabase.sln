@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanDatabase.Domain", "CanDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanDatabase.WebApi", "CanDatabase.WebApi\CanDatabase.WebApi.csproj", "{DBA5BE37-4BBE-4A49-9410-C0F920A1111C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanDatabase.WebApiIntegrationTests", "..\IntegrationTests\CanDatabase.WebApiIntegrationTests\CanDatabase.WebApiIntegrationTests.csproj", "{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,5 +104,17 @@ Global
 		{DBA5BE37-4BBE-4A49-9410-C0F920A1111C}.Release|x64.Build.0 = Release|Any CPU
 		{DBA5BE37-4BBE-4A49-9410-C0F920A1111C}.Release|x86.ActiveCfg = Release|Any CPU
 		{DBA5BE37-4BBE-4A49-9410-C0F920A1111C}.Release|x86.Build.0 = Release|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Debug|x64.Build.0 = Debug|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Debug|x86.Build.0 = Debug|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Release|x64.ActiveCfg = Release|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Release|x64.Build.0 = Release|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Release|x86.ActiveCfg = Release|Any CPU
+		{7AC6107C-E94C-4D5C-A572-F8FDF7B3A83A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

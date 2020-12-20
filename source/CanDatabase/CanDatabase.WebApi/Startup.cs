@@ -4,7 +4,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace CanDatabase.WebApi
 {
-    internal sealed partial class Startup
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed partial class Startup
     {
         #region Constants
         private const string SwaggerDefinitionFileName = "swagger" + FileExtensionConstants.Json;
